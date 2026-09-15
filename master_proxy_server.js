@@ -264,3 +264,6 @@ app.get('/api/kisi', async (req, res) => {
 app.listen(PORT, '0.0.0.0', () => {
     console.log(`🚀 Master Proxy Server (KGI, Maybank, RHB, CGSI, KISI) Berjalan di port ${PORT}`);
 });
+
+// Tambahkan di baris paling bawah master_proxy_server.js
+module.exports = app;
