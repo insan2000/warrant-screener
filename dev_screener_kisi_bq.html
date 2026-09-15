@@ -36,23 +36,23 @@
     <div id="root"></div>
 
     <script type="text/babel">
-        // Helper Endpoint Dinamis ke Port 3002 (Master Proxy Server)
+        // Helper Endpoint Universal (Vercel, Render, DevTunnels, & Local)
         const getProxyEndpoint = (port, path) => {
             const hostname = window.location.hostname;
             
+            // 1. Production Cloud (Vercel, Render, dll) -> Gunakan Relative Path HTTPS
+            if (hostname.includes('vercel.app') || hostname.includes('onrender.com') || (hostname !== 'localhost' && hostname !== '127.0.0.1' && !hostname.includes('devtunnels.ms'))) {
+                return path; 
+            }
+            
+            // 2. VS Code Dev Tunnels
             if (hostname.includes('devtunnels.ms')) {
-                if (hostname.includes(`-${port}.`)) {
-                    return path;
-                }
+                if (hostname.includes(`-${port}.`)) return path;
                 const proxyHost = hostname.replace(/-\d+/, `-${port}`);
                 return `https://${proxyHost}${path}`;
             }
             
-            if (hostname !== 'localhost' && hostname !== '127.0.0.1') {
-                if (window.location.port === String(port)) return path;
-                return `http://${hostname}:${port}${path}`;
-            }
-            
+            // 3. Testing Lokal Laptop
             if (window.location.port === String(port)) return path;
             return `http://localhost:${port}${path}`;
         };
