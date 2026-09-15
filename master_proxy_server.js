@@ -10,7 +10,7 @@ app.use(cors());
 // Melayani seluruh file HTML screener di folder ini
 app.use(express.static(__dirname));
 
-// 1. ENDPOINT KGI (HD)
+// 1. ENDPOINT KGI (HD) - UPDATED FOR VERCEL
 app.get('/api/kgi', async (req, res) => {
     console.log("\n⏳ Menarik data khusus KGI (HD)...");
     try {
@@ -20,6 +20,7 @@ app.get('/api/kgi', async (req, res) => {
                 "accept-language": "en-US,en;q=0.9",
                 "authorization": "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI3NzcxMjEyNS01NzA5LTRkNTAtYWNhMC04MWE2Y2NjZDFiMjIiLCJMb2dpblVzZXJJZCI6IlN0cnVjdHVyZWRXYXJyYW50IiwiTG9naW5Vc2VyTmFtZSI6IkluZG9uZXNpYSIsIkxvZ2luVXNlckVtYWlsIjoiaXQuYXBAa2dpLmNvbSIsIm5iZiI6MTc4OTQzMTY4MCwiZXhwIjoxNzg5NTE4MDgwLCJpYXQiOjE3ODk0MzE2ODAsImlzcyI6Imh0dHBzOi8va2dpLmNvbSIsImF1ZCI6Imh0dHBzOi8va2dpLmNvbSJ9.itx5_wfrqaQQjwUQX3itSPJoXoXtAJ428FAeltZMGjd9Mxl8yrloG0dj_9C0K_UxH7JzpldsMOHEyjeNah6K5g",
                 "content-type": "application/json",
+                "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
                 "priority": "u=1, i",
                 "cookie": "warrant_search_params={%22issuingBroker%22:%22PT%20KGI%20SEKURITAS%22%2C%22underlying%22:%22All%22%2C%22callPut%22:%22All%22%2C%22effectiveGearing%22:%22All%22%2C%22exercisePriceStart%22:%22%22%2C%22exercisePriceEnd%22:%22%22%2C%22maturityStart%22:%22All%22%2C%22maturityEnd%22:%22All%22%2C%22moneynessStart%22:%22All%22%2C%22moneynessEnd%22:%22All%22%2C%22warrantPriceStart%22:%220%22%2C%22warrantPriceEnd%22:%2250%22}",
                 "Referer": "https://warrants.kgi.id/id/warrant-search"
