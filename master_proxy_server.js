@@ -10,25 +10,49 @@ app.use(cors());
 // Melayani seluruh file HTML screener di folder ini
 app.use(express.static(__dirname));
 
-// 1. ENDPOINT KGI (HD) - UPDATED FOR VERCEL
+// 1. ENDPOINT KGI (HD) - FIXED ERROR HANDLING
 app.get('/api/kgi', async (req, res) => {
     console.log("\n⏳ Menarik data khusus KGI (HD)...");
     try {
         const response = await fetch("https://warrants.kgi.id/StructuredWarrant/WarrantSearch/Searchs/SearchData", {
-  "headers": {
-    "accept": "application/json, text/plain, */*",
-    "accept-language": "en-US,en;q=0.9",
-    "authorization": "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI3NzcxMjEyNS01NzA5LTRkNTAtYWNhMC04MWE2Y2NjZDFiMjIiLCJMb2dpblVzZXJJZCI6IlN0cnVjdHVyZWRXYXJyYW50IiwiTG9naW5Vc2VyTmFtZSI6IkluZG9uZXNpYSIsIkxvZ2luVXNlckVtYWlsIjoiaXQuYXBAa2dpLmNvbSIsIm5iZiI6MTc4OTQzMTY4MCwiZXhwIjoxNzg5NTE4MDgwLCJpYXQiOjE3ODk0MzE2ODAsImlzcyI6Imh0dHBzOi8va2dpLmNvbSIsImF1ZCI6Imh0dHBzOi8va2dpLmNvbSJ9.itx5_wfrqaQQjwUQX3itSPJoXoXtAJ428FAeltZMGjd9Mxl8yrloG0dj_9C0K_UxH7JzpldsMOHEyjeNah6K5g",
-    "content-type": "application/json",
-    "priority": "u=1, i",
-    "cookie": "warrant_search_params={%22issuingBroker%22:%22PT%20KGI%20SEKURITAS%20INDONESIA%22%2C%22underlying%22:%22All%22%2C%22callPut%22:%22All%22%2C%22effectiveGearing%22:%22All%22%2C%22exercisePriceStart%22:%22%22%2C%22exercisePriceEnd%22:%22%22%2C%22maturityStart%22:%22All%22%2C%22maturityEnd%22:%22All%22%2C%22moneynessStart%22:%22All%22%2C%22moneynessEnd%22:%22All%22%2C%22warrantPriceStart%22:%220%22%2C%22warrantPriceEnd%22:%2250%22}",
-    "Referer": "https://warrants.kgi.id/id/warrant-search"
-  },
-  "body": "{\"Underlying\":\"All\",\"IssuingBroker\":\"PT KGI SEKURITAS INDONESIA\",\"Callput\":-1,\"EffectiveGearing1\":-1,\"EffectiveGearing2\":-1,\"ExercisePrice1\":\"All\",\"ExercisePrice2\":\"All\",\"TimeMaturity1\":-1,\"TimeMaturity2\":-1,\"Moneyness1\":-1,\"Moneyness2\":-1,\"WarrantPrice1\":\"0\",\"WarrantPrice2\":\"50\",\"Page\":1,\"ItemsPerPage\":-1,\"SortName\":\"\",\"SortDirection\":\"\"}",
-  "method": "POST"
-});
+            "headers": {
+                "accept": "application/json, text/plain, */*",
+                "accept-language": "id-ID,id;q=0.9,en-US;q=0.8,en;q=0.7",
+                "authorization": "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI3NzcxMjEyNS01NzA5LTRkNTAtYWNhMC04MWE2Y2NjZDFiMjIiLCJMb2dpblVzZXJJZCI6IlN0cnVjdHVyZWRXYXJyYW50IiwiTG9naW5Vc2VyTmFtZSI6IkluZG9uZXNpYSIsIkxvZ2luVXNlckVtYWlsIjoiaXQuYXBAa2dpLmNvbSIsIm5iZiI6MTc4OTQzMTY4MCwiZXhwIjoxNzg5NTE4MDgwLCJpYXQiOjE3ODk0MzE2ODAsImlzcyI6Imh0dHBzOi8va2dpLmNvbSIsImF1ZCI6Imh0dHBzOi8va2dpLmNvbSJ9.itx5_wfrqaQQjwUQX3itSPJoXoXtAJ428FAeltZMGjd9Mxl8yrloG0dj_9C0K_UxH7JzpldsMOHEyjeNah6K5g",
+                "content-type": "application/json",
+                "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
+                "Referer": "https://warrants.kgi.id/id/warrant-search"
+            },
+            "body": JSON.stringify({
+                "Underlying": "All",
+                "IssuingBroker": "PT KGI SEKURITAS INDONESIA",
+                "Callput": -1,
+                "EffectiveGearing1": -1,
+                "EffectiveGearing2": -1,
+                "ExercisePrice1": "All",
+                "ExercisePrice2": "All",
+                "TimeMaturity1": -1,
+                "TimeMaturity2": -1,
+                "Moneyness1": -1,
+                "Moneyness2": -1,
+                "WarrantPrice1": "0",
+                "WarrantPrice2": "50",
+                "Page": 1,
+                "ItemsPerPage": -1,
+                "SortName": "",
+                "SortDirection": ""
+            }),
+            "method": "POST"
+        });
 
-        if (!response.ok) throw new Error("Gagal akses KGI (HTTP " + response.status + ")");
+        if (!response.ok) {
+            const errText = await response.text();
+            console.error(`❌ Penolakan dari KGI: HTTP ${response.status}`);
+            return res.status(response.status).json({ 
+                error: `KGI menolak koneksi (HTTP ${response.status}). Kemungkinan IP Cloud Vercel diblokir.`,
+                detail: errText 
+            });
+        }
 
         const rawText = await response.text();
         const jsonData = JSON.parse(rawText);
@@ -38,24 +62,14 @@ app.get('/api/kgi', async (req, res) => {
             dataArray = jsonData.Value.Warrants;
         } else if (jsonData && Array.isArray(jsonData.data)) {
             dataArray = jsonData.data;
-        } else if (jsonData && Array.isArray(jsonData.items)) {
-            dataArray = jsonData.items;
         } else if (Array.isArray(jsonData)) {
             dataArray = jsonData;
-        } else if (typeof jsonData === 'object' && jsonData !== null) {
-            const foundArrays = Object.values(jsonData).filter(val => Array.isArray(val));
-            if (foundArrays.length > 0) {
-                dataArray = foundArrays.sort((a, b) => b.length - a.length)[0];
-            } else {
-                dataArray = [jsonData];
-            }
         }
 
-        res.json({ stats: { success: ['KGI'], failed: [] }, data: dataArray });
-        console.log(`✅ Sukses! ${dataArray.length} waran KGI berhasil ditarik.`);
+        return res.json({ stats: { success: ['KGI'], failed: [] }, data: dataArray });
     } catch (error) {
-        console.error("❌ Error KGI:", error.message);
-        res.status(500).json({ error: error.message });
+        console.error("❌ Error KGI Serverless:", error.message);
+        return res.status(500).json({ error: error.message });
     }
 });
 
