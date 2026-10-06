@@ -17,7 +17,7 @@ app.get('/api/kgi', async (req, res) => {
         const response = await fetch("https://warrants.kgi.id/StructuredWarrant/WarrantSearch/Searchs/SearchData", {
   "headers": {
     "accept": "application/json, text/plain, */*",
-    "accept-language": "en-US,en;q=0.7",
+    "accept-language": "en-US,en;q=0.8",
     "authorization": "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI1Yjc1MjEyNy1hZTZjLTQ5MGMtODAxOC01NTg1YWEzNjlhN2YiLCJMb2dpblVzZXJJZCI6IlN0cnVjdHVyZWRXYXJyYW50IiwiTG9naW5Vc2VyTmFtZSI6IkluZG9uZXNpYSIsIkxvZ2luVXNlckVtYWlsIjoiaXQuYXBAa2dpLmNvbSIsIm5iZiI6MTc5MTE2OTY1MCwiZXhwIjoxNzkxMjU2MDUwLCJpYXQiOjE3OTExNjk2NTAsImlzcyI6Imh0dHBzOi8va2dpLmNvbSIsImF1ZCI6Imh0dHBzOi8va2dpLmNvbSJ9.5-f66CrcvDzgEV7fo6wzGqJMmYeTXU8nmVQu3DThQ36d46d1cw3lP1c1qVtqfRqXwdO6CQmpzFAD7cEZEui8Kg",
     "content-type": "application/json",
     "priority": "u=1, i",
