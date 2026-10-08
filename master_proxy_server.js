@@ -18,7 +18,7 @@ app.get('/api/kgi', async (req, res) => {
   "headers": {
     "accept": "application/json, text/plain, */*",
     "accept-language": "en-US,en;q=0.8",
-    "authorization": "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI1Yjc1MjEyNy1hZTZjLTQ5MGMtODAxOC01NTg1YWEzNjlhN2YiLCJMb2dpblVzZXJJZCI6IlN0cnVjdHVyZWRXYXJyYW50IiwiTG9naW5Vc2VyTmFtZSI6IkluZG9uZXNpYSIsIkxvZ2luVXNlckVtYWlsIjoiaXQuYXBAa2dpLmNvbSIsIm5iZiI6MTc5MTE2OTY1MCwiZXhwIjoxNzkxMjU2MDUwLCJpYXQiOjE3OTExNjk2NTAsImlzcyI6Imh0dHBzOi8va2dpLmNvbSIsImF1ZCI6Imh0dHBzOi8va2dpLmNvbSJ9.5-f66CrcvDzgEV7fo6wzGqJMmYeTXU8nmVQu3DThQ36d46d1cw3lP1c1qVtqfRqXwdO6CQmpzFAD7cEZEui8Kg",
+    "authorization": "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJmNzM5ZDJlNC1mYjJmLTQwODgtYmVhYi1mNjdlNTQ4Mzk1Y2MiLCJMb2dpblVzZXJJZCI6IlN0cnVjdHVyZWRXYXJyYW50IiwiTG9naW5Vc2VyTmFtZSI6IkluZG9uZXNpYSIsIkxvZ2luVXNlckVtYWlsIjoiaXQuYXBAa2dpLmNvbSIsIm5iZiI6MTc5MTQyNDkyNSwiZXhwIjoxNzkxNTExMzI1LCJpYXQiOjE3OTE0MjQ5MjUsImlzcyI6Imh0dHBzOi8va2dpLmNvbSIsImF1ZCI6Imh0dHBzOi8va2dpLmNvbSJ9.dJgUkIRb8CVyXL7GyZVeVJW03hf6RZ0lB1yHVXfZZ-dVIJ7GjBrnOYU1J6Eflc3WYwK_UYkxHNX6g-Q_ERxx-A",
     "content-type": "application/json",
     "priority": "u=1, i",
     "cookie": "warrant_search_params={%22issuingBroker%22:%22PT%20KGI%20SEKURITAS%20INDONESIA%22%2C%22underlying%22:%22All%22%2C%22callPut%22:%22All%22%2C%22effectiveGearing%22:%22All%22%2C%22exercisePriceStart%22:%22%22%2C%22exercisePriceEnd%22:%22%22%2C%22maturityStart%22:%22All%22%2C%22maturityEnd%22:%22All%22%2C%22moneynessStart%22:%22All%22%2C%22moneynessEnd%22:%22All%22%2C%22warrantPriceStart%22:%220%22%2C%22warrantPriceEnd%22:%2250%22}",
